@@ -11,6 +11,9 @@ import Quote from "@editorjs/quote";
 import CheckList from "@editorjs/checklist";
 import Delimiter from "@editorjs/delimiter";
 import CustomMarker from "editor-js-custom-marker";
+import CiteLink from "../custom_tools/CiteLink";
+import InlineLink from "../custom_tools/InlineLink";
+import InlineLinkButton from "../custom_tools/InlineLinkButton";
 
 const customTools = {
   embed: Embed,
@@ -64,6 +67,9 @@ const customTools = {
   redFontMarker: CustomMarker("赤", "#bb0000", "red", "span", true),
   blueFontMarker: CustomMarker("青", "#0000ff", "blue", "span", true),
   greenFontMarker: CustomMarker("緑", "#008000", "green", "span", true),
+  CiteLink: CiteLink,
+  InlineLink: InlineLink,
+  InlineLinkButton: InlineLinkButton,
 };
 
 export default customTools;

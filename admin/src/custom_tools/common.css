@@ -1,0 +1,8 @@
+.custom-two-column {
+  display: flex;
+  gap: 4px;
+}
+
+.custom-top-margin {
+  margin-top: 8px;
+}
