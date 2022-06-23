@@ -1,4 +1,4 @@
-export const getToggleFunc = ({openStateSetter, indexStateSetter}) => {
+export const getToggleFunc = ({ openStateSetter, indexStateSetter }) => {
   return (idx) => {
     if (idx || idx === 0) {
       indexStateSetter(idx);
@@ -8,12 +8,11 @@ export const getToggleFunc = ({openStateSetter, indexStateSetter}) => {
   };
 };
 
-export const changeFunc = ({indexStateSetter, editor, data, index}) => {
+export const changeFunc = ({ indexStateSetter, editor, data, index }) => {
   let insertedBlocksCount = 0;
   data.forEach((entry) => {
-
     if (!entry.mime.includes("image")) {
-        return;
+      return;
     }
 
     const newBlockType = "image";
@@ -30,12 +29,18 @@ export const changeFunc = ({indexStateSetter, editor, data, index}) => {
       caption: "",
       withBorder: false,
       withBackground: false,
-      stretched: false
+      stretched: false,
     };
 
-    editor.blocks.insert(newBlockType, newBlockData, {}, index + insertedBlocksCount, true);
+    editor.blocks.insert(
+      newBlockType,
+      newBlockData,
+      {},
+      index + insertedBlocksCount,
+      true
+    );
     insertedBlocksCount++;
-  })
+  });
 
   editor.blocks.delete(index + insertedBlocksCount);
   indexStateSetter(-1);
