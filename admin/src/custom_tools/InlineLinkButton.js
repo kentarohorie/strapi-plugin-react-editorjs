@@ -34,8 +34,8 @@ class InlineLinkButton {
 
   save(blockContent) {
     return {
-      text: blockContent.querySelector("text").value,
-      linkURL: blockContent.querySelector("linkURL").value,
+      text: blockContent.querySelector("#text").value,
+      linkURL: blockContent.querySelector("#linkURL").value,
     };
   }
 

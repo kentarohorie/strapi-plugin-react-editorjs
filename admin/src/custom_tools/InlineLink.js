@@ -2,8 +2,9 @@ const createCustomCommonInput = require("./common").createCustomCommonInput;
 require("./common.css").toString();
 
 class InlineLink {
-  constructor({ data }) {
+  constructor({ data, config, api, block }) {
     this.data = data;
+    this.config = config;
   }
 
   render() {
@@ -39,6 +40,18 @@ class InlineLink {
       true
     );
 
+    const displayImage = document.createElement("img");
+    displayImage.style.maxWidth = "50%";
+    displayImage.setAttribute("src", this.data.linkContentImage?.file?.url);
+    displayImage.addEventListener("click", () => {
+      this.config.customMediaLibToggleFunc();
+      this.config.setUpdateMediaData({
+        keyName: "linkContentImage",
+        originalData: this.data,
+      });
+    });
+
+    wrapper.appendChild(displayImage);
     forms.appendChild(linkTitleInput);
     forms.appendChild(linkURLInput);
     wrapper.appendChild(forms);
@@ -50,11 +63,11 @@ class InlineLink {
 
   save(blockContent) {
     return {
-      linkTitle: blockContent.querySelector("linkTitle").value,
-      linkURL: blockContent.querySelector("linkURL").value,
-      linkContentImage: {},
-      linkContentText: blockContent.querySelector("linkContentText").value,
-      linkComment: blockContent.querySelector("linkComment").value,
+      linkTitle: blockContent.querySelector("#linkTitle").value,
+      linkURL: blockContent.querySelector("#linkURL").value,
+      linkContentText: blockContent.querySelector("#linkContentText").value,
+      linkContentImage: this.data.linkContentImage,
+      linkComment: blockContent.querySelector("#linkComment").value,
     };
   }
 

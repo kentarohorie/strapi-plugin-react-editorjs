@@ -8,10 +8,18 @@ import MediaLibAdapter from "../medialib/adapter";
 import MediaLibComponent from "../medialib/component";
 import { changeFunc, getToggleFunc } from "../medialib/utils";
 
+import InlineLink from "../../custom_tools/InlineLink";
+
 const Editor = ({ onChange, name, value }) => {
   const [editorInstance, setEditorInstance] = useState();
   const [mediaLibBlockIndex, setMediaLibBlockIndex] = useState(-1);
   const [isMediaLibOpen, setIsMediaLibOpen] = useState(false);
+
+  const [updateMediaData, setUpdateMediaData] = useState({
+    keyName: null,
+    originalData: null,
+  });
+  const [isCustomMediaLibOpen, setIsCustomMediaLibOpen] = useState(false);
 
   const mediaLibToggleFunc = useCallback(
     getToggleFunc({
@@ -20,6 +28,10 @@ const Editor = ({ onChange, name, value }) => {
     }),
     []
   );
+
+  const customMediaLibToggleFunc = useCallback(() => {
+    setIsCustomMediaLibOpen((prev) => !prev);
+  });
 
   const handleMediaLibChange = useCallback(
     (data) => {
@@ -34,11 +46,52 @@ const Editor = ({ onChange, name, value }) => {
     [mediaLibBlockIndex, editorInstance]
   );
 
+  const handleCustomMediaLibChange = useCallback(
+    (data) => {
+      const entry = data[0];
+      const newBlockData = {
+        file: {
+          url: entry.url.replace(window.location.origin, ""),
+          mime: entry.mime,
+          height: entry.height,
+          width: entry.width,
+          size: entry.size,
+          alt: entry.alt,
+          formats: entry.formats,
+        },
+        caption: "",
+        withBorder: false,
+        withBackground: false,
+        stretched: false,
+      };
+
+      const currentBlockIndex = editorInstance.blocks.getCurrentBlockIndex();
+      const currentBlock = editorInstance.blocks.getBlockByIndex(0);
+      editorInstance.blocks.update(currentBlock.id, {
+        ...updateMediaData.originalData,
+        [updateMediaData.keyName]: newBlockData,
+      });
+      currentBlock.dispatchChange();
+      customMediaLibToggleFunc();
+    },
+    [editorInstance, updateMediaData]
+  );
+
   const customImageTool = {
     mediaLib: {
       class: MediaLibAdapter,
       config: {
         mediaLibToggleFunc,
+      },
+    },
+  };
+
+  const inlineLinkTool = {
+    InlineLink: {
+      class: InlineLink,
+      config: {
+        customMediaLibToggleFunc,
+        setUpdateMediaData,
       },
     },
   };
@@ -66,7 +119,12 @@ const Editor = ({ onChange, name, value }) => {
               onChange({ target: { name, value: JSON.stringify(newData) } });
             }
           }}
-          tools={{ ...requiredTools, ...customTools, ...customImageTool }}
+          tools={{
+            ...requiredTools,
+            ...customTools,
+            ...customImageTool,
+            ...inlineLinkTool,
+          }}
           instanceRef={(instance) => setEditorInstance(instance)}
         />
       </div>
@@ -74,6 +132,11 @@ const Editor = ({ onChange, name, value }) => {
         isOpen={isMediaLibOpen}
         onChange={handleMediaLibChange}
         onToggle={mediaLibToggleFunc}
+      />
+      <MediaLibComponent
+        isOpen={isCustomMediaLibOpen}
+        onChange={handleCustomMediaLibChange}
+        onToggle={customMediaLibToggleFunc}
       />
     </>
   );
