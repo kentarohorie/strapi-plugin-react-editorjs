@@ -9,6 +9,9 @@ import MediaLibComponent from "../medialib/component";
 import { changeFunc, getToggleFunc } from "../medialib/utils";
 
 import InlineLink from "../../custom_tools/InlineLink";
+import RichImage from "../../custom_tools/RichImage";
+import product from "../../custom_tools/product";
+import NoteAcdContent from "../../custom_tools/NoteAcdContent";
 
 const Editor = ({ onChange, name, value }) => {
   const [editorInstance, setEditorInstance] = useState();
@@ -18,6 +21,7 @@ const Editor = ({ onChange, name, value }) => {
   const [updateMediaData, setUpdateMediaData] = useState({
     keyName: null,
     originalData: null,
+    blockId: null,
   });
   const [isCustomMediaLibOpen, setIsCustomMediaLibOpen] = useState(false);
 
@@ -65,8 +69,10 @@ const Editor = ({ onChange, name, value }) => {
         stretched: false,
       };
 
-      const currentBlockIndex = editorInstance.blocks.getCurrentBlockIndex();
-      const currentBlock = editorInstance.blocks.getBlockByIndex(0);
+      // indexは挙動が怪しいのでIDで直接引く
+      const currentBlock = editorInstance.blocks.getById(
+        updateMediaData.blockId
+      );
       editorInstance.blocks.update(currentBlock.id, {
         ...updateMediaData.originalData,
         [updateMediaData.keyName]: newBlockData,
@@ -96,6 +102,36 @@ const Editor = ({ onChange, name, value }) => {
     },
   };
 
+  const richImageTool = {
+    RichImage: {
+      class: RichImage,
+      config: {
+        customMediaLibToggleFunc,
+        setUpdateMediaData,
+      },
+    },
+  };
+
+  const productTool = {
+    product: {
+      class: product,
+      config: {
+        customMediaLibToggleFunc,
+        setUpdateMediaData,
+      },
+    },
+  };
+
+  const noteAcdContentTool = {
+    NoteAcdContent: {
+      class: NoteAcdContent,
+      config: {
+        customMediaLibToggleFunc,
+        setUpdateMediaData,
+      },
+    },
+  };
+
   return (
     <>
       <div
@@ -112,7 +148,7 @@ const Editor = ({ onChange, name, value }) => {
             if (value && JSON.parse(value).blocks.length) {
               api.blocks.render(JSON.parse(value));
             }
-            document.querySelector('[data-tool="image"]').remove();
+            // document.querySelector('[data-tool="image"]').remove(); editorjsを2.23.2 -> 2.25.0にしたら不要になった
           }}
           onChange={(api, newData) => {
             if (newData.blocks.length) {
@@ -124,6 +160,9 @@ const Editor = ({ onChange, name, value }) => {
             ...customTools,
             ...customImageTool,
             ...inlineLinkTool,
+            ...richImageTool,
+            ...productTool,
+            ...noteAcdContentTool,
           }}
           instanceRef={(instance) => setEditorInstance(instance)}
         />

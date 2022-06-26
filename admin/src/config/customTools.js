@@ -1,6 +1,5 @@
 import PluginId from "../pluginId";
 
-import Embed from "@editorjs/embed";
 import Table from "@editorjs/table";
 import List from "@editorjs/list";
 import Warning from "@editorjs/warning";
@@ -13,9 +12,11 @@ import Delimiter from "@editorjs/delimiter";
 import CustomMarker from "editor-js-custom-marker";
 import CiteLink from "../custom_tools/CiteLink";
 import InlineLinkButton from "../custom_tools/InlineLinkButton";
+import QuoteWithLink from "../custom_tools/QuoteWithLink";
+import EmbedWithTitle from "../custom_tools/EmbedWithTitle";
 
 const customTools = {
-  embed: Embed,
+  embed: EmbedWithTitle,
   table: {
     class: Table,
     inlineToolbar: true,
@@ -68,6 +69,7 @@ const customTools = {
   greenFontMarker: CustomMarker("緑", "#008000", "green", "span", true),
   CiteLink: CiteLink,
   InlineLinkButton: InlineLinkButton,
+  QuoteWithLink: QuoteWithLink,
 };
 
 export default customTools;

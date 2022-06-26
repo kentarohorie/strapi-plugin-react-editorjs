@@ -2,7 +2,7 @@ const createCustomCommonInput = require("./common").createCustomCommonInput;
 require("./common.css").toString();
 
 class InlineLink {
-  constructor({ data, config, api, block }) {
+  constructor({ data, config }) {
     this.data = data;
     this.config = config;
   }
@@ -36,7 +36,7 @@ class InlineLink {
     const linkCommentInput = createCustomCommonInput(
       "linkComment",
       "コメント",
-      this.data.linkCommentInput || "",
+      this.data.linkComment || "",
       true
     );
 
