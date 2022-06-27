@@ -173,8 +173,8 @@ const Editor = ({ onChange, name, value }) => {
         onChange={handleMediaLibChange}
         onToggle={mediaLibToggleFunc}
       />
-      // 画像を利用するカスタムツール用のメディアモーダル
       <MediaLibComponent
+        // 画像を利用するカスタムツール用のメディアモーダル
         isOpen={isCustomMediaLibOpen}
         onChange={handleCustomMediaLibChange}
         onToggle={customMediaLibToggleFunc}
