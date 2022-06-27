@@ -2,9 +2,10 @@ const createCustomCommonInput = require("./common").createCustomCommonInput;
 require("./common.css").toString();
 
 class InlineLink {
-  constructor({ data, config }) {
+  constructor({ data, config, block }) {
     this.data = data;
     this.config = config;
+    this.block = block;
   }
 
   render() {
@@ -48,6 +49,7 @@ class InlineLink {
       this.config.setUpdateMediaData({
         keyName: "linkContentImage",
         originalData: this.data,
+        blockId: this.block.id,
       });
     });
 
