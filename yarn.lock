@@ -115,10 +115,10 @@
     codex-tooltip "^1.0.5"
     nanoid "^3.1.22"
 
-"@editorjs/embed@^2.5.1":
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/@editorjs/embed/-/embed-2.5.1.tgz#e03e56d880df7816e34f5419b4ed0e8059885173"
-  integrity sha512-QoBvC6upo5ubO0toGlt5b1Upcq15MC4eqejxcjcm291Ww5cO+lKhSFY6KNk3ldL9PnWKtORxFCd6pAawtkkijA==
+"@editorjs/embed@^2.5.2":
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/@editorjs/embed/-/embed-2.5.2.tgz#25ebdd35c70124af14512582914bd2bf70cc84b8"
+  integrity sha512-l+knGtiWwmAjasZARGhFJkQZU2A2kGvPN1orJAtNWLOj7r52IKxFQxHE2FfcYX0lTq15p4iUQAxaY1DwZJF+gw==
 
 "@editorjs/header@2.6.2":
   version "2.6.2"
