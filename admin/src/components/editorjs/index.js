@@ -50,6 +50,7 @@ const Editor = ({ onChange, name, value }) => {
     [mediaLibBlockIndex, editorInstance]
   );
 
+  // 画像を利用するカスタムツール向けの画像ハンドリング
   const handleCustomMediaLibChange = useCallback(
     (data) => {
       const entry = data[0];
@@ -172,6 +173,7 @@ const Editor = ({ onChange, name, value }) => {
         onChange={handleMediaLibChange}
         onToggle={mediaLibToggleFunc}
       />
+      // 画像を利用するカスタムツール用のメディアモーダル
       <MediaLibComponent
         isOpen={isCustomMediaLibOpen}
         onChange={handleCustomMediaLibChange}
