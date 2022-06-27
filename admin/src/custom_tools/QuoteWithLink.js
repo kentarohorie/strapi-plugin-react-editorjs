@@ -54,7 +54,7 @@ class QuoteWithLink {
 
   static get toolbox() {
     return {
-      title: "リンク付き参照",
+      title: "リッチ引用",
       icon: "<span>付</span>",
     };
   }
