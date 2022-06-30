@@ -70,7 +70,7 @@ class product {
   }
 
   save(blockContent) {
-    return {
+    const new_data = {
       productLink: blockContent.querySelector("#productLink").value,
       name: blockContent.querySelector("#name").value,
       description: blockContent.querySelector("#description").value,
@@ -78,6 +78,9 @@ class product {
       comment: blockContent.querySelector("#comment").value,
       image: this.data.image,
     };
+
+    this.data = new_data;
+    return new_data;
   }
 
   static get toolbox() {

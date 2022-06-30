@@ -64,13 +64,16 @@ class InlineLink {
   }
 
   save(blockContent) {
-    return {
+    const new_data = {
       linkTitle: blockContent.querySelector("#linkTitle").value,
       linkURL: blockContent.querySelector("#linkURL").value,
       linkContentText: blockContent.querySelector("#linkContentText").value,
       linkContentImage: this.data.linkContentImage,
       linkComment: blockContent.querySelector("#linkComment").value,
     };
+
+    this.data = new_data;
+    return new_data;
   }
 
   static get toolbox() {

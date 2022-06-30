@@ -34,9 +34,12 @@ class NoteAcdContent {
   }
 
   save() {
-    return {
+    const new_data = {
       image: this.data.image,
     };
+
+    this.data = new_data;
+    return new_data;
   }
 
   static get toolbox() {

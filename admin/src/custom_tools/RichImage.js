@@ -48,11 +48,16 @@ class RichImage {
   }
 
   save(blockContent) {
-    return {
+    const new_data = {
       title: blockContent.querySelector("#title").value,
       comment: blockContent.querySelector("#comment").value,
       image: this.data.image,
     };
+
+    // 画像設定時にフィールドがクリアされないため
+    this.data = new_data;
+
+    return new_data;
   }
 
   static get toolbox() {
