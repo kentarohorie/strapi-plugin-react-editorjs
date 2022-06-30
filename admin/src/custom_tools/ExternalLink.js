@@ -1,7 +1,7 @@
 const createCustomCommonInput = require("./common").createCustomCommonInput;
 require("./common.css").toString();
 
-class InlineLink {
+class ExternalLink {
   constructor({ data, config, block }) {
     this.data = data;
     this.config = config;
@@ -78,10 +78,10 @@ class InlineLink {
 
   static get toolbox() {
     return {
-      title: "リッチリンク",
+      title: "外部用リッチリンク",
       icon: "<span>リ</span>",
     };
   }
 }
 
-module.exports = InlineLink;
+module.exports = ExternalLink;

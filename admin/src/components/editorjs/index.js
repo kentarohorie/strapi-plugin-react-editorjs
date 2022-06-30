@@ -8,10 +8,10 @@ import MediaLibAdapter from "../medialib/adapter";
 import MediaLibComponent from "../medialib/component";
 import { changeFunc, getToggleFunc } from "../medialib/utils";
 
-import InlineLink from "../../custom_tools/InlineLink";
 import RichImage from "../../custom_tools/RichImage";
 import product from "../../custom_tools/product";
 import NoteAcdContent from "../../custom_tools/NoteAcdContent";
+import ExternalLink from "../../custom_tools/ExternalLink";
 
 const Editor = ({ onChange, name, value }) => {
   const [editorInstance, setEditorInstance] = useState();
@@ -93,9 +93,9 @@ const Editor = ({ onChange, name, value }) => {
     },
   };
 
-  const inlineLinkTool = {
-    InlineLink: {
-      class: InlineLink,
+  const externalLinkTool = {
+    ExternalLink: {
+      class: ExternalLink,
       config: {
         customMediaLibToggleFunc,
         setUpdateMediaData,
@@ -160,7 +160,7 @@ const Editor = ({ onChange, name, value }) => {
             ...requiredTools,
             ...customTools,
             ...customImageTool,
-            ...inlineLinkTool,
+            ...externalLinkTool,
             ...richImageTool,
             ...productTool,
             ...noteAcdContentTool,

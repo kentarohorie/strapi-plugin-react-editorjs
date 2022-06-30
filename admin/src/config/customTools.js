@@ -14,6 +14,7 @@ import CiteLink from "../custom_tools/CiteLink";
 import InlineLinkButton from "../custom_tools/InlineLinkButton";
 import QuoteWithLink from "../custom_tools/QuoteWithLink";
 import EmbedWithTitle from "../custom_tools/EmbedWithTitle";
+import InternalLink from "../custom_tools/InternalLink";
 
 const customTools = {
   embed: EmbedWithTitle,
@@ -70,6 +71,7 @@ const customTools = {
   CiteLink: CiteLink,
   InlineLinkButton: InlineLinkButton,
   QuoteWithLink: QuoteWithLink,
+  InternalLink: InternalLink,
 };
 
 export default customTools;
