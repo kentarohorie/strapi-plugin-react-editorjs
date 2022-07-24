@@ -15,6 +15,7 @@ import InlineLinkButton from "../custom_tools/InlineLinkButton";
 import QuoteWithLink from "../custom_tools/QuoteWithLink";
 import EmbedWithTitle from "../custom_tools/EmbedWithTitle";
 import InternalLink from "../custom_tools/InternalLink";
+import NoteAcdContent from "../custom_tools/NoteAcdContent";
 
 const customTools = {
   embed: EmbedWithTitle,
@@ -72,6 +73,7 @@ const customTools = {
   InlineLinkButton: InlineLinkButton,
   QuoteWithLink: QuoteWithLink,
   InternalLink: InternalLink,
+  NoteAcdContent: NoteAcdContent,
 };
 
 export default customTools;

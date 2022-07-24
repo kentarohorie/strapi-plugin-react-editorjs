@@ -2,10 +2,8 @@ const createCustomCommonInput = require("./common").createCustomCommonInput;
 require("./common.css").toString();
 
 class NoteAcdContent {
-  constructor({ data, config, block }) {
+  constructor({ data }) {
     this.data = data;
-    this.config = config;
-    this.block = block;
   }
 
   render() {
@@ -15,31 +13,24 @@ class NoteAcdContent {
     const label = document.createElement("label");
     label.innerText = "香りの変化を確認";
 
-    const displayImage = document.createElement("img");
-    displayImage.style.maxWidth = "50%";
-    displayImage.setAttribute("src", this.data.image?.file?.url);
-    displayImage.addEventListener("click", () => {
-      this.config.customMediaLibToggleFunc();
-      this.config.setUpdateMediaData({
-        keyName: "image",
-        originalData: this.data,
-        blockId: this.block.id,
-      });
-    });
+    const productIdInput = createCustomCommonInput(
+      "productId",
+      "商品ID",
+      this.data.productId || ""
+    );
 
     wrapper.appendChild(label);
-    wrapper.appendChild(displayImage);
+    wrapper.appendChild(productIdInput);
 
     return wrapper;
   }
 
-  save() {
-    const new_data = {
-      image: this.data.image,
-    };
+  save(blockContent) {
+    const productId = blockContent.querySelector("#productId").value;
 
-    this.data = new_data;
-    return new_data;
+    return {
+      productId: productId,
+    };
   }
 
   static get toolbox() {

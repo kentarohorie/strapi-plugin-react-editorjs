@@ -10,7 +10,6 @@ import { changeFunc, getToggleFunc } from "../medialib/utils";
 
 import RichImage from "../../custom_tools/RichImage";
 import product from "../../custom_tools/product";
-import NoteAcdContent from "../../custom_tools/NoteAcdContent";
 import ExternalLink from "../../custom_tools/ExternalLink";
 
 const Editor = ({ onChange, name, value }) => {
@@ -123,16 +122,6 @@ const Editor = ({ onChange, name, value }) => {
     },
   };
 
-  const noteAcdContentTool = {
-    NoteAcdContent: {
-      class: NoteAcdContent,
-      config: {
-        customMediaLibToggleFunc,
-        setUpdateMediaData,
-      },
-    },
-  };
-
   return (
     <>
       <div
@@ -163,7 +152,6 @@ const Editor = ({ onChange, name, value }) => {
             ...externalLinkTool,
             ...richImageTool,
             ...productTool,
-            ...noteAcdContentTool,
           }}
           instanceRef={(instance) => setEditorInstance(instance)}
         />
